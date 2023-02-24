@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="config.js"></script>
+    </head>
+    <body onload="loadFunc()" class="config">
+        <form onsubmit="myFunc()" id="ConfigForm" method="dialog">
+            <p>
+                Login: <input type="text" name="username" id="username">
+            </p>
+            <p>
+                Password: <input type="password" name="password" id="password">
+            </p>
+            <p>
+                Api Link: <input type="url" name="url" id="url">
+            </p>
+            <p>
+                En Api Link: <input type="url" name="url_en" id="url_en">
+            </p>
+            <input type="submit" value="Save">
+        </form>
+    </body>
+</html>

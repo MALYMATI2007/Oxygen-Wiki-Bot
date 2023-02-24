@@ -1,0 +1,87 @@
+@import url("http://fonts.googleapis.com/css2?family=Roboto+Mono");
+
+:root {
+    --background-color: rgb(255, 255, 255);
+    --text-color: black;
+    --submit-button-color: rgb(20, 111, 185);
+}
+
+.dark {
+    --background-color: rgba(16 18 27);
+    --text-color: white;
+}
+
+body {
+    font-family: 'Roboto Mono';
+    font-size: 15px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+.config form {
+    text-align: center;
+}
+
+form input {
+    height: 20px;
+    width: 150px;
+
+}
+
+.config form input[type=submit] {
+    width: 75px;
+}
+
+form #url {
+    width: 250px;
+}
+
+form #url_en {
+    width: 250px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.right {
+    float: right;
+    margin-right: 10px;
+}
+
+.left {
+    float: left;
+}
+
+.menu {
+    align-items: center;
+    margin-left: 10px;
+}
+
+.menu span {
+    font-size: 20px;
+}
+
+.menu .input textarea {
+    resize: none;
+    height: 100px;
+    width: 250px;
+}
+
+.menu .input input {
+    height: 25px;
+    width: 248px;
+    margin-bottom: 5px;
+}
+
+.menu .submit input {
+    height: 25px;
+    width: 75px;
+    background-color: var(--submit-button-color);
+    border-radius: 20px;
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}

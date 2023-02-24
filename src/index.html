@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="app.js"></script>
+    </head>
+    <body onload="loadFunc()" class="index">
+        <div class="row">
+        <form id="TransferForm" method="dialog" onsubmit="transfer()">
+            <div class="menu">
+                <span class="name">File Transfer</span>
+                <div class="input"><textarea id="TransferInput"></textarea></div>
+                <div class="submit"><input type="submit"></div>
+            </div>
+        </form>
+        <form id="TransferForm" method="dialog" onsubmit="addCategory()">
+            <div class="menu">
+                <span class="name">Categorizator</span>
+                <div class="input"><textarea id="CategorysationInput"></textarea></div>
+                <div class="input"><input type="text" id="CategoryInput" placeholder="Category:Xyz"></div>
+                <div class="submit"><input type="submit"></div>
+            </div>
+        </form>
+        </div>
+    </body>
+</html>
