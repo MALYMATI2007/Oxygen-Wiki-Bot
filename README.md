@@ -6,18 +6,21 @@ Simple graphical MediaWiki Bot
  * [ ] Multi app languages
  * [ ] Auto updates
  * [ ] Catching errors
+ * [ ] Move `config.json` to UserData (appdata) and `temp.png` to temp dir
+ * [ ] Linux, MacOS, Portable versions
+ * [ ] Config Profiles
 
 ## Instruction
 
 ### Config
 Click "Config" button on menu.
 
-| Input       | value         | example                            |
-| ----------- | ------------- | ---------------------------------- |
-| Login       | Bot username  | Archi@PotatoBot                    |
-| password    | bot password  | ahfh6Gjd8794hfksnhFjhgfd           |
-| Api link    | Wiki api link | https://pl.wikipedia.org/w/api.php |
-| En Api Link | Wiki api link | https://wikipedia.org/w/api.php    |
+| Input       | value                    | example                            |
+| ----------- | ------------------------ | ---------------------------------- |
+| `Login`     | Bot username             | Archi@PotatoBot                    |
+| `password`  | Bot password             | ahfh6Gjd8794hfk0nhfjh1fdga7kpc9    |
+| `Api link`  | Wiki api link            | https://pl.wikipedia.org/w/api.php |
+|`Nl Api Link`| Wiki api link (No Login) | https://wikipedia.org/w/api.php    |
 
 ### File Transfer
 Enter list of file names (New line is a separator)

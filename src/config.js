@@ -13,7 +13,7 @@ if (data.dark_mode) addClass(document.getElementsByTagName("body")[0], "dark")
 document.getElementById("username").value = data.username
 document.getElementById("password").value = data.password
 document.getElementById("url").value = data.url
-document.getElementById("url_en").value = data.url_en
+document.getElementById("url_nl").value = data.url_nl
 
 }
 
@@ -26,7 +26,7 @@ function myFunc() {
         username: formData.get("username"),
         password: formData.get("password"),
         url: formData.get("url"),
-        url_en: formData.get("url_en")
+        url_nl: formData.get("url_nl")
     } )
 
 }

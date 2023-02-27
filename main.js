@@ -8,7 +8,7 @@ clearConfigFile = `{
     "username":"",
     "password":"",
     "url":"",
-    "url_en":""
+    "url_nl":""
 }
 `
 
@@ -35,8 +35,8 @@ let bot = new mwn({
     maxRetries: 5       // attempt to retry a failing requests upto 5 times
 });
 
-let botEn = new mwn({
-    apiUrl: Config.url_en,
+let botNl = new mwn({
+    apiUrl: Config.url_nl,
     username: Config.username,
     password: Config.password
 });
@@ -52,7 +52,8 @@ function createWindow () {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
-        }
+        },
+        icon: "src/icon.ico"
     })
     
     mainWindow.loadFile("src/index.html")
@@ -127,7 +128,8 @@ function createConfigWindow () {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
-        }
+        },
+        icon: "src/icon.ico"
     })
 
     configWindow.loadFile("src/config.html")
@@ -166,8 +168,8 @@ ipcMain.on('submitConfig', (event, data) => {
             password: Config.password
         });
 
-        botEn.setOptions({
-            apiUrl: Config.url_en,
+        botNl.setOptions({
+            apiUrl: Config.url_nl,
             username: Config.username,
             password: Config.password
         });
@@ -181,11 +183,11 @@ ipcMain.on("TransferImages", (event, list) => {
 
     (async () => {
         
-        await botEn.getSiteInfo()
+        await botNl.getSiteInfo()
         
         list.forEach(async element => {
             await bot.login()
-            await botEn.download(`File:${element}`, "temp.png")
+            await botNl.download(`File:${element}`, "temp.png")
             await bot.upload("temp.png", `File:${element}`, " ")
             await bot.logout()
         });
