@@ -1,7 +1,16 @@
 const {app, BrowserWindow, Menu, ipcMain, MenuItem} = require('electron')
 const fs = require("fs")
 const { mwn } = require('mwn');
+const path = require('path')
+const {getTranslation} = require("./src/Translations.js")
 
+const location = app.getLocaleCountryCode()
+
+require('@electron/remote/main').initialize()
+
+configPath = path.join(app.getPath("userData"), "config.json")
+tempImageFile = path.join(app.getPath("temp"), "owb.png")
+uploadPath = path.join(app.getPath("userData"), "upload/")
 
 clearConfigFile = `{
     "dark_mode": false,
@@ -12,18 +21,22 @@ clearConfigFile = `{
 }
 `
 
-if (!fs.existsSync("config.json")) {
-    fs.writeFileSync("config.json", clearConfigFile, "utf8"/*, err => {
+if (!fs.existsSync(configPath)) {
+    fs.writeFileSync(configPath, clearConfigFile, "utf8", err => {
         if (err) {
-          console.log(`Error writing file: ${err}`)
+          console.log(getTranslation(location, "log_file_error"), err)
           app.quit();
         } else {
-          console.log(`File is written successfully!`)
+          console.log(getTranslation(location, "log_file_success"))
         }
-      }*/)
+      })
 }
 
-Config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
+if (!fs.existsSync(uploadPath)) {
+    fs.mkdirSync(uploadPath)
+}
+
+Config = JSON.parse(fs.readFileSync(configPath, 'utf8'))
 
 
 let bot = new mwn({
@@ -55,38 +68,40 @@ function createWindow () {
         },
         icon: "src/icon.ico"
     })
+
+    require('@electron/remote/main').enable(mainWindow.webContents)
     
     mainWindow.loadFile("src/index.html")
 
     menu = new Menu.buildFromTemplate(
         [
             {
-                label: "Plik",
+                label: getTranslation(location, "menu_file"),
                 submenu:[
                     {
-                        label: "Zamknij",
+                        label: getTranslation(location, "menu_file_quit"),
                         role: "close"
                     }
                 ]
             },
             {
-                label: "Widok",
+                label: getTranslation(location, "menu_view"),
                 submenu: [
                     {
-                        label: "Ciemny motyw",
+                        label: getTranslation(location, "menu_view_dark"),
                         type: "checkbox",
-                        checked: JSON.parse(fs.readFileSync('config.json', 'utf8')).dark_mode,
+                        checked: JSON.parse(fs.readFileSync(configPath, 'utf8')).dark_mode,
                         click: e => {
 
-                            data = JSON.parse(fs.readFileSync('config.json', 'utf8'))
+                            data = JSON.parse(fs.readFileSync(configPath, 'utf8'))
 
                             data.dark_mode = e.checked
 
-                            fs.writeFile("config.json", JSON.stringify(data, null, "\t"), "utf8", err => {
+                            fs.writeFile(configPath, JSON.stringify(data, null, "\t"), "utf8", err => {
                                 if (err) {
-                                  console.log(`Error writing file: ${err}`)
+                                  console.log(getTranslation(location, "log_file_error"), err)
                                 } else {
-                                  console.log(`File is written successfully!`)
+                                  console.log(getTranslation(location, "log_file_success"))
                                 }
                             })
 
@@ -96,7 +111,7 @@ function createWindow () {
                 ]
             },
             {
-                label: "Config",
+                label: getTranslation(location, "menu_config"),
                 click() {
                     createConfigWindow()
                 }
@@ -132,6 +147,8 @@ function createConfigWindow () {
         icon: "src/icon.ico"
     })
 
+    require('@electron/remote/main').enable(configWindow.webContents)
+
     configWindow.loadFile("src/config.html")
 
     configWindow.setMenu(null)
@@ -152,15 +169,15 @@ app.whenReady().then(() => {
 
 ipcMain.on('submitConfig', (event, data) => {
 
-    fs.writeFile("config.json", JSON.stringify(data, null, "\t"), "utf8", err => {
+    fs.writeFile(configPath, JSON.stringify(data, null, "\t"), "utf8", err => {
         if (err) {
-          console.log(`Error writing file: ${err}`)
+          console.log(getTranslation(location, "log_file_error"), err)
         } else {
-          console.log(`File is written successfully!`)
+          console.log(getTranslation(location, "log_file_success"))
 
           configWindow.close()
 
-          Config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
+          Config = JSON.parse(fs.readFileSync(configPath, 'utf8'))
 
           bot.setOptions({
             apiUrl: Config.url,
@@ -185,12 +202,12 @@ ipcMain.on("TransferImages", (event, list) => {
         
         await botNl.getSiteInfo()
         
-        list.forEach(async element => {
+        for (const element of list) {
             await bot.login()
-            await botNl.download(`File:${element}`, "temp.png")
-            await bot.upload("temp.png", `File:${element}`, " ")
+            await botNl.download(`File:${element}`, tempImageFile)
+            await bot.upload(tempImageFile, `File:${element}`, " ", { ignorewarnings: true })
             await bot.logout()
-        });
+        }
     })();
 
 });
@@ -203,10 +220,12 @@ ipcMain.on("AddCategory", (event, data) => {
     console.log(JSON.stringify(list))
     console.log(category)
 
-    list.forEach(async element => {
+    (async () => {
+        
+        for (const element of list) {
 
-        await bot.login()
-        await bot.edit(element, (rev) => {
+            await bot.login()
+            await bot.edit(element, (rev) => {
 
             let text = rev.content + `\n[[${category}]]`
 
@@ -216,12 +235,28 @@ ipcMain.on("AddCategory", (event, data) => {
                 minor: true,
                 watchlist: "nochange"
             };
-        })/*.then(() => {
-            console.log("Promise Resolved");
-        }).catch((err) => {
-            console.log(`Promise Rejected`);
-        })*/
-        await bot.logout()
+            })/*.then(() => {
+                console.log("Promise Resolved");
+            }).catch((err) => {
+                console.log(`Promise Rejected`);
+            })*/
+            await bot.logout()
         
-    });
+        }
+    })();
+});
+
+ipcMain.on("TransferImages", (event, list) => {
+
+    (async () => {
+
+        list = fs.readdirSync(uploadPath)
+        
+        for (const element of list) {
+            await bot.login()
+            await bot.upload(path.join(uploadPath, element), `File:${element}`, " ", { ignorewarnings: true })
+            await bot.logout()
+        }
+    })();
+
 });

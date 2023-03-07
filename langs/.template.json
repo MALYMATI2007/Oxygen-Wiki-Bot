@@ -1,0 +1,23 @@
+{
+    "LanguageName":"",
+    "TranslationAuthor":"",
+    "log_file_success": "",
+    "log_file_error": "",
+    "menu_file": "",
+    "menu_file_quit": "",
+    "menu_view": "",
+    "menu_view_dark": "",
+    "menu_config": "",
+    "config_save": "",
+    "config_login": "",
+    "config_password": "",
+    "config_link": "",
+    "config_link_nl": "",
+    "win_transfer": "",
+    "win_transfer_submit": "",
+    "win_categorizator": "",
+    "win_categorizator_submit": "",
+    "win_multi_upload": "",
+    "win_multi_upload_dir": "",
+    "win_multi_upload_submit": ""
+}

@@ -1,8 +1,8 @@
 {
   "name": "oxygen_wiki_bot",
   "productName": "Oxygen Wiki Bot",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Simple MediaWiki Bot",
   "author": "MALYMATI2007",
   "license": "MIT",
   "main": "main.js",
@@ -12,6 +12,7 @@
     "dist": "electron-builder --x64 --ia32"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.9",
     "mwn": "^1.11.5"
   },
   "devDependencies": {
@@ -23,10 +24,11 @@
     "productName": "Oxygen Wiki Bot",
     "copyright": "Copyright (c) 2023 MALYMATI2007",
     "win": {
-      "target": [
-        "nsis"
-      ],
+      "target": [ "nsis" ],
       "icon": "src/icon.ico"
+    },
+    "linux": {
+      "target": [ "rpm" ]
     },
     "nsis": {
       "oneClick": false,
@@ -36,10 +38,12 @@
       "installerIcon": "build/installerIcon.ico",
       "uninstallerIcon": "build/uninstallerIcon.ico"
     },
+    "rpm": {},
     "files": [
       "!config.json",
-      "!.gitignore",
-      "!temp.png"
-    ]
+      "!.gitignore"
+    ],
+    "extraFiles": ["langs/"],
+    "buildDependenciesFromSource": true
   }
 }

@@ -1,0 +1,23 @@
+{
+    "LanguageName":"English",
+    "TranslationAuthor":"MALYMATI2007",
+    "log_file_success": "File is written successfully!",
+    "log_file_error": "Error writing file:",
+    "menu_file": "File",
+    "menu_file_quit": "Quit",
+    "menu_view": "View",
+    "menu_view_dark": "Dark Mode",
+    "menu_config": "Config",
+    "config_save": "Save",
+    "config_login": "Login:",
+    "config_password": "Password:",
+    "config_link": "Api Link:",
+    "config_link_nl": "Nl Api Link:",
+    "win_transfer": "File Transfer",
+    "win_transfer_submit": "Transfer",
+    "win_categorizator": "Categorizator",
+    "win_categorizator_submit": "Categorize",
+    "win_multi_upload": "Multi Uploader",
+    "win_multi_upload_dir": "Open Upload Folder",
+    "win_multi_upload_submit": "Upload"
+}

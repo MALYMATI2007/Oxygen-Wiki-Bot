@@ -151,3 +151,6 @@ dist
 # App files
 config.json
 temp.png
+
+
+.dockerignore

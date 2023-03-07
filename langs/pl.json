@@ -1,0 +1,23 @@
+{
+    "LanguageName":"Polski",
+    "TranslationAuthor":"MALYMATI2007",
+    "log_file_success": "Plik został zapisany prawidłowo!",
+    "log_file_error": "Błąd poczas zapisywania pliku:",
+    "menu_file": "Plik",
+    "menu_file_quit": "Wyjdź",
+    "menu_view": "Widok",
+    "menu_view_dark": "Ciemny Motyw",
+    "menu_config": "Konfiguracja",
+    "config_save": "Zapisz",
+    "config_login": "Login:",
+    "config_password": "Hasło:",
+    "config_link": "Api Link:",
+    "config_link_nl": "Nl Api Link:",
+    "win_transfer": "Transfer plików",
+    "win_transfer_submit": "Transfer",
+    "win_categorizator": "Kategoryzator",
+    "win_categorizator_submit": "Kategoryzuj",
+    "win_multi_upload": "Multi Uploader",
+    "win_multi_upload_dir": "Otwórz folder Uploadu",
+    "win_multi_upload_submit": "Uploaduj"
+}

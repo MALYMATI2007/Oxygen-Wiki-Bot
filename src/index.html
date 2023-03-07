@@ -4,22 +4,32 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="app.js"></script>
+        <script src="TranslateRenderer.js"></script>
     </head>
     <body onload="loadFunc()" class="index">
         <div class="row">
-        <form id="TransferForm" method="dialog" onsubmit="transfer()">
+        <form method="dialog" onsubmit="transfer()">
             <div class="menu">
-                <span class="name">File Transfer</span>
+                <span class="name"><translated-text key="win_transfer"></translated-text></span>
                 <div class="input"><textarea id="TransferInput"></textarea></div>
-                <div class="submit"><input type="submit"></div>
+                <div class="submit"><button type="submit"><translated-text key="win_transfer_submit"></translated-text></button></div>
             </div>
         </form>
-        <form id="TransferForm" method="dialog" onsubmit="addCategory()">
+        <form method="dialog" onsubmit="addCategory()">
             <div class="menu">
-                <span class="name">Categorizator</span>
+                <span class="name"><translated-text key="win_categorizator"></translated-text></span>
                 <div class="input"><textarea id="CategorysationInput"></textarea></div>
                 <div class="input"><input type="text" id="CategoryInput" placeholder="Category:Xyz"></div>
-                <div class="submit"><input type="submit"></div>
+                <div class="submit"><button type="submit"><translated-text key="win_categorizator_submit"></translated-text></button></div>
+            </div>
+        </form>
+        <form method="dialog" onsubmit="">
+            <div class="menu">
+                <span class="name"><translated-text key="win_multi_upload"></translated-text></span>
+                <p>
+                    <span class="submit"><button onclick="openUploadPath()"><translated-text key="win_multi_upload_dir"></translated-text></button></span>
+                    <span class="submit"><button type="submit"><translated-text key="win_multi_upload_submit"></translated-text></button></span>
+                </p>
             </div>
         </form>
         </div>

@@ -1,11 +1,14 @@
 const {ipcRenderer} = require('electron')
 const fs = require('fs')
 const {addClass, removeClass} = require('./util.js')
+const { app, shell } = require('@electron/remote')
+const path = require('path')
 
 function loadFunc() {
-const rawData = fs.readFileSync('./config.json', 'utf8')
-const data = JSON.parse(rawData)
-if (data.dark_mode) addClass(document.getElementsByTagName("body")[0], "dark")
+    configPath = path.join(app.getPath("userData"), 'config.json')
+    const rawData = fs.readFileSync(configPath, 'utf8')
+    const data = JSON.parse(rawData)
+    if (data.dark_mode) addClass(document.getElementsByTagName("body")[0], "dark")
 }
 
 function transfer() {
@@ -33,3 +36,7 @@ function addCategory() {
 ipcRenderer.on("switch-theme", (event, arg) => {
     arg ? addClass(document.getElementsByTagName("body")[0], "dark") : removeClass(document.getElementsByTagName("body")[0], "dark")
 })
+
+function openUploadPath() {
+    shell.openPath(path.join(app.getPath("userData"), "upload/"))
+}
