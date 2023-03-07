@@ -246,7 +246,7 @@ ipcMain.on("AddCategory", (event, data) => {
     })();
 });
 
-ipcMain.on("TransferImages", (event, list) => {
+ipcMain.on("UploadImages", (event) => {
 
     (async () => {
 

@@ -40,3 +40,7 @@ ipcRenderer.on("switch-theme", (event, arg) => {
 function openUploadPath() {
     shell.openPath(path.join(app.getPath("userData"), "upload/"))
 }
+
+function uploadImages() {
+    ipcRenderer.send("UploadImages")
+}
